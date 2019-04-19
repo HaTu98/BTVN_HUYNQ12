@@ -1,7 +1,5 @@
 package itlap.service.impl;
 
-
-import itlap.model.Category;
 import itlap.model.Item;
 import itlap.repository.CategoryRepository;
 import itlap.repository.ItemRepository;
@@ -23,8 +21,8 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<Item> findByCategory(String category, int pageIndex, int pageSize) {
-        Category cat = categoryRepository.findByName(category);
-        Page<Item> items = itemRepository.findByCategoryId(cat.getId(),new PageRequest(pageIndex,pageSize));
+        //Category cat = categoryRepository.findByName(category);
+        Page<Item> items = itemRepository.findByCategoryName(category,new PageRequest(pageIndex,pageSize));
         return items.getContent();
     }
 }

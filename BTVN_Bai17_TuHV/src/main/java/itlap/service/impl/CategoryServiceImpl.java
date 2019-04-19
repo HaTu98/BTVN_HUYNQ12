@@ -5,7 +5,6 @@ import itlap.repository.CategoryRepository;
 import itlap.repository.TypeRepository;
 import itlap.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,8 +21,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<Category> findByType(String type, int pageIndex, int pageSize) {
-        Page<Category> categories = categoryRepository.findByTypesId(typeRepository.findByName(type).getId(),new PageRequest(pageIndex,pageSize));
-        return categories.getContent();
+        return categoryRepository.findByTypesName(type,new PageRequest(pageIndex,pageSize)).getContent();
     }
 
     @Override
