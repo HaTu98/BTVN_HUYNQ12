@@ -1,0 +1,19 @@
+insert into types(id,type_name) values (1,'type1');
+insert into types(id,type_name) values (2,'type2');
+insert into types(id,type_name) values (3,'type2');
+insert into types(id,type_name) values (4,'type2');
+
+insert into categories(id,category_name,type_id) values (1,'category1',1);
+insert into categories(id,category_name,type_id) values (2,'category2',1);
+insert into categories(id,category_name,type_id) values (3,'category3',2);
+insert into categories(id,category_name,type_id) values (4,'category4',2);
+
+insert into items(id,item_name) values (1,'item1');
+insert into items(id,item_name) values (2,'item2');
+insert into items(id,item_name) values (3,'item3');
+insert into items(id,item_name) values (4,'item4');
+
+insert into item_category(item_id,category_id) values (1,1);
+insert into item_category(item_id,category_id) values (2,2);
+insert into item_category(item_id,category_id) values (3,3);
+insert into item_category(item_id,category_id) values (4,4);

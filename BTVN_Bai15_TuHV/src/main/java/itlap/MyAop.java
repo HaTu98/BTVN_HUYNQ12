@@ -14,7 +14,7 @@ public class MyAop {
     public void beforeSum(JoinPoint joinPoint) {
         String num1 = (String) joinPoint.getArgs()[0];
         String num2 = (String) joinPoint.getArgs()[1];
-        if(num1.matches("-?\\d+") && num2.matches("-?\\d+")){
+        if (num1.matches("-?\\d+") && num2.matches("-?\\d+")) {
             this.isNumber = true;
         } else {
             this.isNumber = false;
