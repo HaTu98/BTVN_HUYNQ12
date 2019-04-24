@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BTVN</title>
+</head>
+<body>
+<table class="table table-striped">
+    <tr>
+        <th>Vie</th>
+        <th>Eng</th>
+    </tr>
+    <tr th:each="data : ${VieToEng}">
+        <td th:text="${data.vie}">hello</td>
+        <td th:text="${data.eng}">Text ...</td>
+    </tr>
+</table>
+<a th:href="@{/helloworld}">Hello</a>
+</body>
+</html>
