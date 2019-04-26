@@ -1,11 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Login</title>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/main.css}"/>
 </head>
 <body>
+<style>
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+    }
+</style>
 <div>
     <nav class="navbar navbar-inverse navbar-static-top">
         <div class="container">
@@ -14,7 +23,7 @@
                     <a th:href="@{/}">Home</a>
                 </li>
                 <li class="navbar-right">
-                    <a th:href="@{/logout}">Sign Out</a>
+                    <a href="#"> [[${#httpServletRequest.remoteUser}]]</a>
                 </li>
             </ul>
         </div>
@@ -30,5 +39,20 @@
         </form>
     </div>
 </div>
+<div>
+        <div class="footer">
+            <p>
+
+                <span  style="display: inline-block;">
+                    &copy; Logged user: [[${#httpServletRequest.remoteUser}]]
+                     <form th:action="@{/app-logout}" method="POST">
+                         <input type="submit" value="Logout"/>
+                    </form>
+                </span>
+            </p>
+        </div>
+</div>
+<script type="text/javascript" th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
 </body>
 </html>
