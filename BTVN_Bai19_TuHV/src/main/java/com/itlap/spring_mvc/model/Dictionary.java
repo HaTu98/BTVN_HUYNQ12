@@ -1,26 +1,24 @@
-package com.itlap.model;
-
+package com.itlap.spring_mvc.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@Entity
 @Data
 @AllArgsConstructor
-@Entity
-@Table(name = "VieToEng")
-public class VieToEng {
-
-    public VieToEng(){}
-
+@NoArgsConstructor
+@Table(name = "dictionary")
+public class Dictionary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column
-    private String vie;
+    private String word;
 
     @Column(columnDefinition = "text")
-    private String eng;
+    private String mean;
 }

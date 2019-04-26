@@ -9,7 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Main {
     public static void main(String[] args) {
 
-        ApplicationContext context = new ClassPathXmlApplicationContext("configApp.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         MySum mySum = (MySum) context.getBean("mySum");
 
         System.out.println("Result : " + mySum.sum("0", "2"));

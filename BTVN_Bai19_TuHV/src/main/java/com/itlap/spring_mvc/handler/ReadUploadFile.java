@@ -1,28 +1,25 @@
-package com.itlap.service;
-
+package com.itlap.spring_mvc.handler;
 
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class ReadFiles {
-
+public class ReadUploadFile {
     private Map<String, String> dict = new HashMap<>();
-    public Map readFile(String fileName) {
-        try (BufferedReader br = Files.newBufferedReader(Paths.get(fileName))) {
+
+    public Map ReadUploadFile(BufferedReader br) {
+        try {
             String line;
             while ((line = br.readLine()) != null) {
-                String key = line.split(":")[0];
+                String key = line.split(":")[0].trim();
                 try {
-                    String value = line.split(":")[1];
+                    String value = line.split(":")[1].trim();
                     dict.put(key, value);
-                } catch (ArrayIndexOutOfBoundsException e ) {
+                } catch (ArrayIndexOutOfBoundsException e) {
                     dict.put(key, "");
                 }
 
@@ -33,3 +30,4 @@ public class ReadFiles {
         return dict;
     }
 }
+

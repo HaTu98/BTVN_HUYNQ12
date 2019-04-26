@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div>
+    <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container">
+            <ul class="nav navbar-nav">
+                <li class="navbar-left">
+                    <a th:href="@{/}">Home</a>
+                </li>
+                <li class="navbar-right">
+                    <a th:href="@{/login}">Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <div class="col-md-1"></div>
+    <div class="form-group col-md-5">
+        <label for="search">Search:</label>
+        <input class="form-control" list="word" style="font-size: 18pt; height: 110px" id="search" placeholder="search" autocomplete="off"></input>
+        <datalist id="word" >
+        </datalist>
+    </div>
+    <div class="form-group col-md-5">
+        <label for="result">Result:</label>
+<!--        <input class="form-control"  style="font-size: 18pt; height: 110px" id="result" placeholder="Result" readonly></input>-->
+        <textarea class="form-control" id="result" rows="5" readonly></textarea>
+    </div>
+</div>
+
+<script>
+    $(document).ready(
+        function () {
+            $("#search").keyup(function (event) {
+                var word = $("#search").val();
+                word = word.trim();
+                getWordMean(word);
+                getSuggestions(word);
+            })
+        }
+    )
+    
+    function getWordMean(word) {
+        $.ajax({
+            type : "Get",
+            contentType : "application/json",
+            url : "getWord",
+            data : {
+                word : word,
+            },
+            dataType : 'json',
+            success : function(result) {
+                if (result.status == "success") {
+                    if(result.data != null){
+                        $("#result").val(result.data.mean)
+                    }else {
+                        $("#result").val("Không có kết quả");
+                    }
+                }
+            },
+            // error : function(e) {
+            //     alert("Error!")
+            //     console.log("ERROR: ", e);
+            // }
+        });
+    }
+    
+    function getSuggestions(word) {
+        $.ajax({
+            type : "Get",
+            contentType : "application/json",
+            url : "getSuggestions",
+            data : {
+                word : word,
+            },
+            dataType : 'json',
+            success : function(result) {
+                console.log(result)
+                console.log(result.data.mean)
+                if (result.status == "success") {
+                    $("#word").empty();
+                    for(var i = 0; i< result.data.length; i++){
+                        $("#word").append("<option value='" + result.data[i].word + "'></option>")
+                    }
+                }
+            },
+            // error : function(e) {
+            //     alert("Error!")
+            //     console.log("ERROR: ", e);
+            // }
+        });
+    }
+</script>
+</body>
+</html>
